@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+int main() {
+    int rezultati;
+
+    printf("Shkruaj rezultatin (0-100): ");
+    scanf("%d", &rezultati);
+
+    // Kontrolli i validitetit
+    if(rezultati < 0 || rezultati > 100) {
+        printf("Input i pavlefshem!");
+    }
+    else if(rezultati >= 90) {
+        printf("Shkelqyeshem");
+    }
+    else if(rezultati >= 75) {
+        printf("Shume mire");
+    }
+    else if(rezultati >= 60) {
+        printf("Mire");
+    }
+    else {
+        printf("Ne permiresim");
+    }
+
+    return 0;
+}
