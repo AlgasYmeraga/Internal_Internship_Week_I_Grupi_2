@@ -1,0 +1,41 @@
+int main() {
+    int madhesia, zgjedhja;
+
+    // Kërkesa për madhësinë e pattern-it
+    printf("Vendosni madhesine e pattern-it (1-12): ");
+    scanf("%d", &madhesia);
+
+    // Validimi i input-it (Kufiri 1 deri ne 12)
+    if (madhesia < 1 || madhesia > 12) {
+        printf("Gabim: Ju lutem vendosni nje numer pozitiv midis 1 dhe 12.\n");
+        return 1; // Mbyll programin nese input-i nuk eshte valid
+    }
+
+    // Zgjedhja e llojit te pattern-it
+    printf("Zgjidhni llojin e pattern-it:\n");
+    printf("1. Me yje (*)\n");
+    printf("2. Me numra (1, 2, 3...)\n");
+    printf("Zgjedhja juaj (1 ose 2): ");
+    scanf("%d", &zgjedhja);
+
+    printf("\nRezultati:\n");
+
+    // Loop-i per rreshtat
+    for (int i = 1; i <= madhesia; i++) {
+        // Loop-i per elementet brenda rreshtit
+        for (int j = 1; j <= i; j++) {
+            if (zgjedhja == 1) {
+                printf("* ");
+            } else if (zgjedhja == 2) {
+                printf("%d ", j);
+            } else {
+                printf("Zgjedhje e pavlefshme.");
+                return 1;
+            }
+        }
+        // Kalimi ne rreshtin e ri pas cdo iteration-i te loop-it te jashtem
+        printf("\n");
+    }
+
+    return 0;
+}
