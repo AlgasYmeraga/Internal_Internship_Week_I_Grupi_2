@@ -1,0 +1,64 @@
+#include <stdio.h>
+
+int main() {
+    int num;
+    float decimal;
+
+    // Pointer-at
+    int *pNum;
+    float *pDecimal;
+
+    // Input
+    printf("Shkruani nje numer int: ");
+    scanf("%d", &num);
+
+    printf("Shkruani nje numer float: ");
+    scanf("%f", &decimal);
+
+    // Lidhja me adresat
+    pNum = &num;
+    pDecimal = &decimal;
+
+    // Shfaqja e vlerave dhe adresave
+    printf("\n--- VLERAT FILLESTARE ---\n");
+    printf("num = %d\n", num);
+    printf("Adresa e num = %p\n", (void*)&num);
+    printf("Vlera nga pointer (*pNum) = %d\n", *pNum);
+
+    printf("\ndecimal = %.2f\n", decimal);
+    printf("Adresa e decimal = %p\n", (void*)&decimal);
+    printf("Vlera nga pointer (*pDecimal) = %.2f\n", *pDecimal);
+
+    // Ruajmë vlerat para ndryshimit
+    int oldNum = num;
+    float oldDecimal = decimal;
+
+    // Ndryshimi përmes pointer-it
+    *pNum = *pNum + 10;
+    *pDecimal = *pDecimal * 2;
+
+    // Output pas ndryshimit
+    printf("\n--- PAS NDRYSHIMIT ---\n");
+    printf("num i ri = %d\n", num);
+    printf("decimal i ri = %.2f\n", decimal);
+
+    // Kontroll me if/else për num
+    printf("\n--- ANALIZA ---\n");
+
+    if (num > oldNum) {
+        printf("num eshte rritur.\n");
+    } else if (num < oldNum) {
+        printf("num eshte zvogeluar.\n");
+    } else {
+        printf("num ka mbetur i njejte.\n");
+    }
+
+    // Kontroll për interval (decimal)
+    if (decimal >= 0 && decimal <= 100) {
+        printf("decimal eshte ne intervalin [0, 100].\n");
+    } else {
+        printf("decimal eshte jashte intervalit [0, 100].\n");
+    }
+
+    return 0;
+}
