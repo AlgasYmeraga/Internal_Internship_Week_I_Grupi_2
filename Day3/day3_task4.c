@@ -1,43 +1,51 @@
+#include <stdio.h>
+
 int main() {
-    // Requirement: Use at least two numeric variables 
-    int count;
-    double price;
+    // [cite: 98] Two numeric variables: one int and one double
+    int valInt;
+    double valDouble;
 
-    // Requirement: Create pointers for each 
-    int *pCount = &count;
-    double *pPrice = &price;
+    // [cite: 98] Create pointers for each variable
+    int *pInt = &valInt;
+    double *pDouble = &valDouble;
 
-    printf("--- Task 4: Pointer Operations ---\n");
-    printf("Enter an integer value (count): ");
-    scanf("%d", &count);
-    printf("Enter a double value (price): ");
-    scanf("%lf", &price);
+    printf("--- Task 4: Memory and Pointer Analysis ---\n");
+    printf("Enter an integer value: ");
+    scanf("%d", &valInt);
+    printf("Enter a double value: ");
+    scanf("%lf", &valDouble);
 
-    // Store original value for comparison [cite: 59, 60]
-    int initialCount = count;
+    // Save initial value for later comparison [cite: 100]
+    int originalValInt = valInt;
 
-    // Requirement: Display values, addresses, and pointer access 
-    printf("\n[Initial State]\n");
-    printf("Variable 'count': Value = %d, Address = %p\n", count, (void*)&count);
-    printf("Via pCount: Value = %d, Stored Address = %p\n", *pCount, (void*)pCount);
-    
-    printf("\nVariable 'price': Value = %.2f, Address = %p\n", price, (void*)&price);
-    printf("Via pPrice: Value = %.2f, Stored Address = %p\n", *pPrice, (void*)pPrice);
+    //  Display direct values, memory addresses, and values via pointers
+    printf("\n[Initial Data Analysis]\n");
+    printf("Integer: Direct Value = %d, Address = %p, Via Pointer (*) = %d\n", valInt, (void*)&valInt, *pInt);
+    printf("Double:  Direct Value = %.2f, Address = %p, Via Pointer (*) = %.2f\n", valDouble, (void*)&valDouble, *pDouble);
 
-    // Requirement: Change at least one value through a pointer 
-    // Example: Adding 10 to the count through the pointer
-    *pCount = *pCount + 10;
+    // [cite: 100] Change the integer value through the pointer
+    // For this task, we will add 20 to whatever the user entered
+    *pInt = *pInt + 20;
 
-    printf("\n[After Modification via Pointer]\n");
-    printf("New value of 'count': %d\n", count);
+    printf("\n[Modification Phase]\n");
+    printf("Value before change: %d\n", originalValInt);
+    printf("Value after change (*pInt + 20): %d\n", valInt);
 
-    // Requirement: if/else check to show change status 
-    if (count > initialCount) {
+    //  Logic check for final status and intervals
+    printf("\n[Final Evaluation]\n");
+    if (valInt > originalValInt) {
         printf("Status: The value has increased.\n");
-    } else if (count < initialCount) {
+    } else if (valInt < originalValInt) {
         printf("Status: The value has decreased.\n");
     } else {
         printf("Status: The value remained the same.\n");
+    }
+
+    // Checking if the final value enters a specific interval (e.g., 0 to 100)
+    if (valInt >= 0 && valInt <= 100) {
+        printf("Interval Check: The final value is within the [0, 100] range.\n");
+    } else {
+        printf("Interval Check: The final value is outside the [0, 100] range.\n");
     }
 
     return 0;
