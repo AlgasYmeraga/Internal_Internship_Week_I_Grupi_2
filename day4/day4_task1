@@ -1,0 +1,121 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX 5
+
+// Enum për status
+enum Status {
+    NOT_STARTED,
+    IN_PROGRESS,
+    COMPLETED
+};
+
+// Struktura
+struct Student {
+    int id;
+    char name[50];
+    float progress;
+    enum Status status;
+};
+
+// Funksion për status
+void printStatus(enum Status s) {
+    if (s == NOT_STARTED) printf("Not Started");
+    else if (s == IN_PROGRESS) printf("In Progress");
+    else printf("Completed");
+}
+
+// Funksion për shtim studenti
+void addStudent(struct Student students[], int *count) {
+
+    if (*count >= MAX) {
+        printf("⚠️ Lista eshte plot! Nuk mund te shtoni me shume.\n");
+        return;
+    }
+
+    printf("\n--- SHTO STUDENT ---\n");
+
+    printf("ID: ");
+    scanf("%d", &students[*count].id);
+
+    printf("Emri: ");
+    scanf("%s", students[*count].name);
+
+    printf("Progress (0-100): ");
+    scanf("%f", &students[*count].progress);
+
+    // Validim
+    if (students[*count].progress < 0 || students[*count].progress > 100) {
+        printf("❌ Progress i pavlefshem!\n");
+        return;
+    }
+
+    // Status automatik
+    if (students[*count].progress == 0)
+        students[*count].status = NOT_STARTED;
+    else if (students[*count].progress < 100)
+        students[*count].status = IN_PROGRESS;
+    else
+        students[*count].status = COMPLETED;
+
+    (*count)++; // rrit numrin e regjistrimeve
+    printf("✅ Studenti u shtua me sukses!\n");
+}
+
+// Funksion për shfaqje
+void showStudents(struct Student students[], int count) {
+
+    if (count == 0) {
+        printf("⚠️ Nuk ka asnje student.\n");
+        return;
+    }
+
+    printf("\n--- LISTA E STUDENTEVE ---\n");
+
+    for (int i = 0; i < count; i++) {
+        printf("\n[%d]\n", i + 1);
+        printf("ID: %d\n", students[i].id);
+        printf("Emri: %s\n", students[i].name);
+        printf("Progress: %.2f\n", students[i].progress);
+        printf("Status: ");
+        printStatus(students[i].status);
+        printf("\n");
+    }
+
+    printf("\nTotali: %d / %d\n", count, MAX);
+}
+
+int main() {
+    struct Student students[MAX];
+    int count = 0;
+    int choice;
+
+    do {
+        printf("\n====== MENU ======\n");
+        printf("1. Shto student\n");
+        printf("2. Shfaq te gjithe studentet\n");
+        printf("0. Dil\n");
+        printf("Zgjedhja: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                addStudent(students, &count);
+                break;
+
+            case 2:
+                showStudents(students, count);
+                break;
+
+            case 0:
+                printf("Duke dale nga programi...\n");
+                break;
+
+            default:
+                printf("❌ Zgjedhje e pavlefshme!\n");
+        }
+
+    } while (choice != 0);
+
+    return 0;
+}
